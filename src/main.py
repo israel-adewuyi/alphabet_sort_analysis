@@ -1,4 +1,14 @@
-from utils import load_hf_dataset, load_model, load_tokenizer, run_inference
+import logging
+from utils import (
+    load_hf_dataset, 
+    load_model, 
+    load_tokenizer, 
+    run_inference,
+    save_perplexities
+)
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 MODEL_NAMES = [
     "Qwen/Qwen2.5-0.5B-Instruct", 
@@ -13,14 +23,17 @@ MODEL_NAMES = [
 
 def main():
     tokenizer = load_tokenizer("Qwen/Qwen2.5-0.5B-Instruct")
-    
+    perplexities = []
     for model_name in MODEL_NAMES:
         model = load_model(model_name)
         dataset = load_hf_dataset()
         perplexity = run_inference(model, tokenizer, dataset)
-        print(f"Model: {model_name}, Perplexity: {perplexity}")
+        perplexities.append(perplexity)
+        logger.info(f"Model: {model_name}, Perplexity: {perplexity}")
         del model
         del dataset
+    
+    save_perplexities(perplexities, MODEL_NAMES)
 
 if __name__ == "__main__":
     main()

@@ -1,3 +1,5 @@
+import os
+import json
 import torch
 import logging
 from torch import Tensor
@@ -73,6 +75,17 @@ def run_inference(
     logger.info(f"Perplexity: {perplexity}")
     
     return perplexity
+
+def save_perplexities(perplexities: list, model_names: list) -> None:
+    os.makedirs("artefacts", exist_ok=True)
+    
+    data = [
+        {"model_name": model_name, "perplexity": perplexity}
+        for model_name, perplexity in zip(model_names, perplexities)
+    ]
+    
+    with open("artefacts/perplexities.json", "w") as f:
+        json.dump(data, f, indent=4)
 
 """
 - Load model
