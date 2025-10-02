@@ -3,8 +3,8 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 def load_hf_dataset() -> Dataset:
     dataset = load_dataset("israel-adewuyi/eval_data_alphabet_sort", split="train")
-    print(dataset)
-    return dataset["prompt"]
+
+    return list(dataset["prompt"])
 
 # def compute_perplexity()
 
