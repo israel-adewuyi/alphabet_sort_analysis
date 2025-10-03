@@ -122,13 +122,13 @@ def run_inference(
     return outputs.logits, labels
 
 
-def save_perplexities(perplexities: list, model_names: list) -> None:
+def save_metrics(perplexities: list, entropies: list, model_names: list) -> None:
     os.makedirs("artefacts", exist_ok=True)
     
     data = [
-        {"model_name": model_name, "perplexity": perplexity}
-        for model_name, perplexity in zip(model_names, perplexities)
+        {"model_name": model_name, "perplexity": perplexity, "entropy": entropy}
+        for model_name, perplexity, entropy in zip(model_names, perplexities, entropies)
     ]
     
-    with open("artefacts/perplexities.json", "w") as f:
+    with open("artefacts/metrics.json", "w") as f:
         json.dump(data, f, indent=4)

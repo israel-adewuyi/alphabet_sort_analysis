@@ -4,7 +4,7 @@ from utils import (
     load_model, 
     load_tokenizer, 
     run_inference,
-    save_perplexities,
+    save_metrics,
     evaluate_full_dataset
 )
 
@@ -25,19 +25,20 @@ MODEL_NAMES = [
 def main():
     tokenizer = load_tokenizer("Qwen/Qwen2.5-0.5B-Instruct")
     dataset = load_hf_dataset()
-    perplexities = []
+    perplexities, entropies = [], []
     for model_name in MODEL_NAMES:
         model = load_model(model_name)
 
         perplexity, entropy = evaluate_full_dataset(model, tokenizer, dataset, batch_size=16)
         
         perplexities.append(perplexity)
+        entropies.append(entropy)
         logger.info(f"Model: {model_name}, Perplexity: {perplexity}, Entropy: {entropy}")
         
         del model
         # del dataset
     
-    save_perplexities(perplexities, MODEL_NAMES)
+    save_metrics(perplexities, entropies, MODEL_NAMES)
 
 if __name__ == "__main__":
     main()
