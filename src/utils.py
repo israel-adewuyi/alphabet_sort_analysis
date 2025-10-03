@@ -271,7 +271,13 @@ def evaluate_with_kl_divergence(
     return perplexity, entropy, kl_divergence
 
 
-def save_metrics(perplexities: list, entropies: list, kl_divergences: list, model_names: list) -> None:
+def save_metrics(
+    perplexities: list,
+    entropies: list,
+    kl_divergences: list,
+    model_names: list,
+    name: str = "metrics"
+) -> None:
     os.makedirs("artefacts", exist_ok=True)
     
     data = [
@@ -284,5 +290,5 @@ def save_metrics(perplexities: list, entropies: list, kl_divergences: list, mode
         for model_name, perplexity, entropy, kl_divergence in zip(model_names, perplexities, entropies, kl_divergences)
     ]
     
-    with open("artefacts/metrics.json", "w") as f:
+    with open(f"artefacts/{name}.json", "w") as f:
         json.dump(data, f, indent=4)
