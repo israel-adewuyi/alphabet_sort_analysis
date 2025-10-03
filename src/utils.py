@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 def load_hf_dataset() -> Dataset:
     dataset = load_dataset("israel-adewuyi/eval_data_alphabet_sort", split="train")
-    return list(dataset["prompt"])
+    return list(dataset["prompt"])[0:2048:4]
 
 
 def evaluate_full_dataset(
@@ -138,6 +138,14 @@ def save_base_logits(
     
     batch_count = 0
     for i in tqdm(range(0, len(dataset), batch_size), desc="Saving base logits"):
+        batch_file = os.path.join(base_logits_dir, f"batch_{batch_count}.pt")
+        batch_count += 1
+        
+        # Check if batch file already exists
+        if os.path.exists(batch_file):
+            logger.debug(f"Batch {batch_count} already exists, skipping...")
+            continue
+        
         batch = dataset[i:i + batch_size]
         logits, labels = run_inference(model, tokenizer, batch)
         
@@ -147,9 +155,7 @@ def save_base_logits(
             'labels': labels.cpu()
         }
         
-        batch_file = os.path.join(base_logits_dir, f"batch_{batch_count}.pt")
         torch.save(batch_data, batch_file)
-        batch_count += 1
         
         # Free GPU memory
         del logits, labels
