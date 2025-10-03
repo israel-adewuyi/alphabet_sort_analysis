@@ -4,7 +4,8 @@ from utils import (
     load_model, 
     load_tokenizer, 
     run_inference,
-    save_perplexities
+    save_perplexities,
+    evaluate_full_dataset
 )
 
 logging.basicConfig(level=logging.INFO)
@@ -23,15 +24,18 @@ MODEL_NAMES = [
 
 def main():
     tokenizer = load_tokenizer("Qwen/Qwen2.5-0.5B-Instruct")
+    dataset = load_hf_dataset()
     perplexities = []
     for model_name in MODEL_NAMES:
         model = load_model(model_name)
-        dataset = load_hf_dataset()
-        perplexity = run_inference(model, tokenizer, dataset)
+
+        perplexity, entropy = evaluate_full_dataset(model, tokenizer, dataset, batch_size=16)
+        
         perplexities.append(perplexity)
-        logger.info(f"Model: {model_name}, Perplexity: {perplexity}")
+        logger.info(f"Model: {model_name}, Perplexity: {perplexity}, Entropy: {entropy}")
+        
         del model
-        del dataset
+        # del dataset
     
     save_perplexities(perplexities, MODEL_NAMES)
 
