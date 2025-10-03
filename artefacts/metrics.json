@@ -5,32 +5,32 @@
         "entropy": 1.8765944455856471
     },
     {
-        "model_name": "israel-adewuyi/alphabet_sort_0.5B_s100",
+        "model_name": "100 Steps",
         "perplexity": 45.37871551513672,
         "entropy": 1.352933570158423
     },
     {
-        "model_name": "israel-adewuyi/alphabet_sort_0.5B_s200",
+        "model_name": "200 steps",
         "perplexity": 69.54326629638672,
         "entropy": 1.2543552930571453
     },
     {
-        "model_name": "israel-adewuyi/alphabet_sort_0.5B_s300",
+        "model_name": "300 steps",
         "perplexity": 177.61831665039062,
         "entropy": 1.0909875253024053
     },
     {
-        "model_name": "israel-adewuyi/alphabet_sort_0.5B_s400",
+        "model_name": "400 steps",
         "perplexity": 483.441650390625,
         "entropy": 1.0730949953411026
     },
     {
-        "model_name": "israel-adewuyi/alphabet_sort_0.5B_s500",
+        "model_name": "500 steps",
         "perplexity": 1130.8087158203125,
         "entropy": 1.5438277515886556
     },
     {
-        "model_name": "israel-adewuyi/alphabet_sort_0.5B_s600",
+        "model_name": "600 steps",
         "perplexity": 2284.827880859375,
         "entropy": 1.6935472423231954
     }
