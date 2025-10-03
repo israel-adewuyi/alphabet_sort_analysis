@@ -3,7 +3,7 @@ import json
 import torch
 import logging
 from torch import Tensor
-from jaxtyping import Float
+from jaxtyping import Float, Int
 
 from datasets import load_dataset, Dataset
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -18,7 +18,7 @@ def load_hf_dataset() -> Dataset:
 
 def compute_perplexity(
     logits: Float[Tensor, "batch seq_len vocab_size"], 
-    labels: Float[Tensor, "batch seq_len"]
+    labels: Int[Tensor, "batch seq_len"]
 ) -> float:
     """
     Computes the perplexity of a language model given logits and corresponding labels.
@@ -65,7 +65,7 @@ def run_inference(
     model: AutoModelForCausalLM,
     tokenizer: AutoTokenizer,
     inputs: list
-) -> None:
+) -> float:
     tokenized = tokenizer(inputs, return_tensors="pt", padding=True, truncation=True)
     input_ids = tokenized["input_ids"].to("cuda")
 
