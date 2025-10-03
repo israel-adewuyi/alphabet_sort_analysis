@@ -59,7 +59,7 @@ def main():
         
         del model
     
-    save_metrics(perplexities, entropies, kl_divergences, MODEL_NAMES, updated_metrics)
+    save_metrics(perplexities, entropies, kl_divergences, MODEL_NAMES, "updated_metrics")
 
 if __name__ == "__main__":
     main()

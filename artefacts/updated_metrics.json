@@ -1,0 +1,44 @@
+[
+    {
+        "model_name": "Qwen/Qwen2.5-0.5B-Instruct",
+        "perplexity": 25.171234130859375,
+        "entropy": 1.8688083241286788,
+        "kl_divergence": 0.0
+    },
+    {
+        "model_name": "s100",
+        "perplexity": 46.71942901611328,
+        "entropy": 1.347722351666793,
+        "kl_divergence": 0.6859347000862788
+    },
+    {
+        "model_name": "s200",
+        "perplexity": 71.1788558959961,
+        "entropy": 1.2510864554099665,
+        "kl_divergence": 1.1136421425828655
+    },
+    {
+        "model_name": "s300",
+        "perplexity": 178.06666564941406,
+        "entropy": 1.0899445987442165,
+        "kl_divergence": 1.8749413203267218
+    },
+    {
+        "model_name": "s400",
+        "perplexity": 470.6903991699219,
+        "entropy": 1.0787470993486423,
+        "kl_divergence": 2.6934120252294447
+    },
+    {
+        "model_name": "s500",
+        "perplexity": 1087.07177734375,
+        "entropy": 1.5381038628735588,
+        "kl_divergence": 3.965735485484299
+    },
+    {
+        "model_name": "s600",
+        "perplexity": 2312.20166015625,
+        "entropy": 1.6612204838724969,
+        "kl_divergence": 4.791411583168992
+    }
+]
